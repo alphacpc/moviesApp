@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const {Client} = require("@elastic/elasticsearch");
 const app = express();
-const port = 4000;
+const port = 4040;
 
 // MIDDLEWARES
 app.use(cors());
