@@ -8,7 +8,10 @@
   "license": "MIT",
   "private": null,
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "client": "cd frontend && yarn start",
+    "server": "yarn start",
+    "dev": "concurrently \"yarn run server \" \"yarn run client\" "
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.1.0",
@@ -16,6 +19,7 @@
     "express": "^4.17.3"
   },
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
   }
 }
