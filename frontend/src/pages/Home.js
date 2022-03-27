@@ -1,13 +1,20 @@
 import React from 'react'
+import styled from "styled-components";
 import LeftSider from '../components/LeftSider'
 import Navbar from '../components/Navbar'
-import SingleArticle from '../components/SingleArticle'
 
+import Img from "./../assets/images/v1.jpg"
 
+const Movie = styled.div`
+    background: url(${(props) => props.bg});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+`;
 
 const Home = () => {
 
-  const tab = [1,2,3,4,5,6,7,8,9,10]
+  const tab = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,81,1,2,4,6]
 
 
   return (
@@ -33,7 +40,7 @@ const Home = () => {
         <section className='home-section'>
           <div className="movies">
             {tab.map((el, index) => (
-              <SingleArticle ind={index}/>
+              <Movie key={index} className="divMovie" bg={Img}></Movie>
             ))}
           </div>
         </section>

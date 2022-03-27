@@ -33,6 +33,8 @@
     }
 }
 
+
+
 .heading{
     .divIntro{
         // background-color: red;
@@ -70,6 +72,7 @@
 .home-container{
     display: flex;
     background-color: #fbfbfb;
+    padding-top: 50px;
 
     .home-aside{
         flex: 1;
@@ -96,8 +99,6 @@
     div{
         width: 18%;
         height: 40vh;
-        background-color: aqua;
-        padding: 10px;
         margin: 10px;
     }
 }
