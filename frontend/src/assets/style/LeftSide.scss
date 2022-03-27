@@ -1,0 +1,47 @@
+.divFiltersList{
+    background-color: #ffffff;
+    padding: 20px;
+    .divGroupFilter{
+
+        margin-bottom: 20px;
+        
+        h3{
+            font-size: 24px;
+            padding: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        ul{
+            li{
+                margin: 15px 0;
+                font-size: 20px;
+                letter-spacing: 1px;
+                text-transform: capitalize;
+
+                label{
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            button{
+                margin-right: 20px;
+                margin-bottom: 10px;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                border: none;
+                letter-spacing: 1px;
+                line-height: 30px;
+            }
+
+            button:focus{
+                background-color: red;
+                color: white;
+            }
+        }
+    }
+}
