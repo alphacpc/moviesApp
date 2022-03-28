@@ -87,11 +87,11 @@ const LeftSider = () => {
         <div className="divGroupFilter year">
             <h3>Year</h3>
             <div>
-                <button>2022</button>
-                <button>2021</button>
-                <button>2020</button>
-                <button>2019</button>
-                <button>2018</button>
+                <button>2017</button>
+                <button>2016</button>
+                <button>2015</button>
+                <button>2014</button>
+                <button>2013</button>
             </div>
         </div>
         
@@ -103,6 +103,7 @@ const LeftSider = () => {
                 <button>Spain</button>
                 <button>France</button>
                 <button>China</button>
+                <button>Germany</button>
             </div>
         </div>
 
