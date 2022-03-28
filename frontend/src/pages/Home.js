@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import LeftSider from '../components/LeftSider'
 import Navbar from '../components/Navbar'
+import ReactFlag  from "react-country-flag"
 
 import Img from "./../assets/images/v1.jpg"
 
@@ -38,6 +39,9 @@ const Home = () => {
         </aside>
 
         <section className='home-section'>
+
+          <ReactFlag className="countryFlag" svg countryCode="sn" style={{ width: "40px", height: "40px", marginRight:'4px'}}/>
+
           <div className="movies">
             {tab.map((el, index) => (
               <Movie key={index} className="divMovie" bg={Img}></Movie>
