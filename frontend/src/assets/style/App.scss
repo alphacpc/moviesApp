@@ -15,7 +15,7 @@
     background: linear-gradient(to right, #0f0f0fd3, #000000b7),url('./../images/banner.jpg') no-repeat;
     background-position: center;
     background-size: cover;
-    height: 80vh;
+    height: 70vh;
 }
 
 .heading nav{
@@ -100,5 +100,13 @@
         width: 18%;
         height: 40vh;
         margin: 10px;
+    }
+
+    .movieParagraph{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
     }
 }

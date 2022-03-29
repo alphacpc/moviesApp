@@ -11,7 +11,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/apis/elastic", elasticRoute);
 
 
-
 app.listen(port, () => {
   console.log(`Server listenning on ${port}`)
 })

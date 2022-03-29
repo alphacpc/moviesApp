@@ -7,7 +7,7 @@ router.get("/all" , async (req, res) => {
     try{
         const result = await client.search({
           index: 'movies',
-          size : 1000,
+          size : 100,
           from : 0,
           query: {
             match_all: {}

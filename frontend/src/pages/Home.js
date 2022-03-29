@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import LeftSider from '../components/LeftSider'
 import Navbar from '../components/Navbar'
 import ReactFlag  from "react-country-flag"
+import axios from "axios"
 
 import Img from "./../assets/images/v1.jpg"
 
@@ -15,8 +16,27 @@ const Movie = styled.div`
 
 const Home = () => {
 
-  const tab = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,81,1,2,4,6]
+  const [movies, setMovies] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
+  const fethMovies = async () => {
+    const result = await (await axios.get('/all')).data
+    setMovies(result)
+    console.log()
+    setLoaded(true)
+  }
+
+  const getFlag = (el)=> el._source.original_language==='en' ?  'us' : el._source.original_language
+  
+
+
+  useEffect(()=>{
+    fethMovies()
+  },[loaded])
+
+
+  console.log(movies[3]?._source)
+  
 
   return (
     <>
@@ -40,13 +60,21 @@ const Home = () => {
 
         <section className='home-section'>
 
-          <ReactFlag className="countryFlag" svg countryCode="sn" style={{ width: "40px", height: "40px", marginRight:'4px'}}/>
-
-          <div className="movies">
-            {tab.map((el, index) => (
-              <Movie key={index} className="divMovie" bg={Img}></Movie>
+          { movies && (<div className="movies">
+            {movies.map((el, index) => (
+              <Movie key={index} className="divMovie" bg={Img}>
+                
+                <h2>
+                  <ReactFlag className="countryFlag" svg countryCode={getFlag(el)} style={{ width: "25px", height: "25px", marginRight:'4px'}}/>
+                  {el._source.title}
+                </h2>
+                <p className="movieParagraph">{el._source.overview}</p>
+              </Movie>
             ))}
-          </div>
+          </div>)}
+
+          {movies.length === 0  && (<div>Chargement en cours d'execution...</div>)}
+
         </section>
 
       </main>
