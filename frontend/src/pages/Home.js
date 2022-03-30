@@ -26,7 +26,19 @@ const Home = () => {
     setLoaded(true)
   }
 
-  const getFlag = (el)=> el._source.original_language==='en' ?  'us' : el._source.original_language
+  // const getFlag = (el)=> el._source.original_language==='en' ?  'us' : el._source.original_language
+
+  const getFlag = (el) => {
+    if(el._source.original_language==='en'){
+      return 'us'
+    }else if (el._source.original_language==='da'){
+      return 'dk'
+    }
+    else{
+      return el
+    }
+  }
+
   
 
 
@@ -63,12 +75,13 @@ const Home = () => {
           { movies && (<div className="movies">
             {movies.map((el, index) => (
               <Movie key={index} className="divMovie" bg={Img}>
-                
-                <h2>
-                  <ReactFlag className="countryFlag" svg countryCode={getFlag(el)} style={{ width: "25px", height: "25px", marginRight:'4px'}}/>
-                  {el._source.title}
-                </h2>
-                <p className="movieParagraph">{el._source.overview}</p>
+                <div className="overlay">
+                  <h2>
+                    <ReactFlag className={`countryFlagn`} svg countryCode={getFlag(el)} style={{ width: "25px", height: "25px", marginRight:'4px'}}/>
+                    {el._source.title}
+                  </h2>
+                  <p className="movieParagraph">{el._source.overview}</p>
+                </div>
               </Movie>
             ))}
           </div>)}
