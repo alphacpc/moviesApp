@@ -18,6 +18,7 @@ const Home = () => {
 
   const [movies, setMovies] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [keyword, setKeyword] = useState("")
 
   const fethMovies = async () => {
     const result = await (await axios.get('/all')).data
@@ -37,11 +38,12 @@ const Home = () => {
     }
   }
 
-const handleCheckedProduction = async (e) => {
-    const valueLabel = e.target.parentNode.querySelector("label").innerText
-    const result = await axios.get(`/companies?company=${valueLabel}`) 
-    console.log(result.data)
-}
+
+  const handleCheckedProduction = async (e) => {
+      const valueLabel = e.target.parentNode.querySelector("label").innerText
+      const result = await axios.get(`/companies?company=${valueLabel}`) 
+      console.log(result.data)
+  }
 
   
   const handleLangues = async (e) => {
@@ -61,35 +63,32 @@ const handleCheckedProduction = async (e) => {
   const handlePopular = async (e) => {
     const result = await axios.get(`/popularity`) 
     console.log(result.data)
-}
+  }
 
-const handleReted = async (e) => {
-  const orderClassname = e.target.className
-  const result = await axios.get(`/votes?order=${orderClassname}`) 
-  console.log(result.data)
-}
+  const handleReted = async (e) => {
+    const orderClassname = e.target.className
+    const result = await axios.get(`/votes?order=${orderClassname}`) 
+    console.log(result.data)
+  }
 
-const handleReleaseYear = async (e) => {
-  const releaseYear = e.target.innerText
-  const result = await axios.get(`/release_date?year=${releaseYear}`) 
-  console.log(result.data)
-}
+  const handleReleaseYear = async (e) => {
+    const releaseYear = e.target.innerText
+    const result = await axios.get(`/release_date?year=${releaseYear}`) 
+    console.log(result.data)
+  }
 
 
-const handleCountries = async (e) => {
-  const country = e.target.innerText
-  const result = await axios.get(`/countries?name=${country}`) 
-  console.log(result.data)
-}
+  const handleCountries = async (e) => {
+    const country = e.target.innerText
+    const result = await axios.get(`/countries?name=${country}`) 
+    console.log(result.data)
+  }
 
   useEffect(()=>{
     fethMovies()
-  },[loaded])
+  },[loaded,keyword ])
 
-
-  console.log(movies[3]?._source)
   
-
   return (
     <>
       <header className="heading">
@@ -99,7 +98,7 @@ const handleCountries = async (e) => {
           <h1>Elastic Web App Movies With ReactJS</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quia commodi voluptates quas facilis eveniet delectus sapiente doloribus, veritatis minus vel quibusdam rem, distinctio at dicta amet obcaecati suscipit similique.
           Dolores ea et quaerat cupiditate voluptatibus aperiam est. Libero recusandae magni eius dolorem, consectetur inventore possimus nisi? Eveniet qui maxime temporibus optio?</p>
-          <input type="search" placeholder="Search ..."/>
+          <input type="search" placeholder="Search ..." onChange={ (e) => setKeyword(e.target.value) }/>
         </div>
 
       </header>
@@ -118,8 +117,8 @@ const handleCountries = async (e) => {
 
         <section className='home-section'>
 
-          { movies && (<div className="movies">
-            {movies.map((el, index) => (
+          {movies && (<div className="movies">
+            {movies.filter((movie) => movie._source.title.toLowerCase().includes(keyword.toLowerCase())).map((el, index) => (
               <Movie key={index} className="divMovie" bg={Img}>
                 <div className="overlay">
                   <h2>

@@ -1,6 +1,5 @@
 import React from 'react'
 import "./../assets/style/LeftSide.scss"
-import axios from "axios"
 
 const LeftSider = ({handleChecked, handleLangues, handleType, handlePopular,handleReted, handleReleaseYear, handleCountries}) => {
 
