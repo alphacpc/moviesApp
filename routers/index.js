@@ -26,8 +26,10 @@ router.get("/all" , async (req, res) => {
 // GET MOVIES BY COMPANY
 router.get("/companies" , async (req, res) => {
 
-    const companyName = req.body.company
+    const companyName = req.query.company
     
+  console.log(companyName)
+
     try{
         const result = await client.search({
           index: 'movies',
@@ -54,7 +56,7 @@ router.get("/companies" , async (req, res) => {
 router.get("/langues" , async (req, res) => {
 
     // liste = ["english", "italiano", "français", "Deutsch", "Español", "广州话 / 廣州話", ""]
-    const langName = req.body.langue
+    const langName = req.query.name
     
     try{
         const result = await client.search({
@@ -80,10 +82,10 @@ router.get("/langues" , async (req, res) => {
 
 
 // GET MOVIES BY GENRES
-router.get("/type" , async (req, res) => {
+router.get("/types" , async (req, res) => {
 
     // liste = ["Drama", "Comedy", "Horror", "Action", "Science Fiction", "Romance", "Documentary"]
-    const typeName = req.body.type
+    const typeName = req.query.type
     
     try{
         const result = await client.search({
@@ -109,10 +111,10 @@ router.get("/type" , async (req, res) => {
 
 
 // GET MOVIES BY YEAR
-router.get("/release_year" , async (req, res) => {
+router.get("/release_date" , async (req, res) => {
 
     // Year <= 2017
-    const dateTIME = req.body.release_date
+    const dateTIME = req.query.year
     
     try{
         const result = await client.search({
@@ -140,7 +142,7 @@ router.get("/release_year" , async (req, res) => {
 // GET MOVIES BY COUNTRY
 router.get("/countries" , async (req, res) => {
 
-    const countryName = req.body.country
+    const countryName = req.query.name
     
     try{
         const result = await client.search({
@@ -168,7 +170,7 @@ router.get("/countries" , async (req, res) => {
 
 // GET MOVIES BY POPULARITY
 router.get("/popularity" , async (req, res) => {
-    
+
     try{
         const result = await client.search({
           index: 'movies',
@@ -191,38 +193,16 @@ router.get("/popularity" , async (req, res) => {
 
 
 // GET MOVIES BY VOTE AVERAGE
-router.get("/votes/desc" , async (req, res) => {
+router.get("/votes" , async (req, res) => {
     
+    const orderBy = req.query.order
+  
     try{
         const result = await client.search({
           index: 'movies',
           size : 10,
           sort: [
-            { vote_average: "desc" }
-          ]
-        })
-        const datas = await result.hits.hits
-
-        res.status(200).json(datas);
-      
-    }
-    
-    catch(err){
-        console.log(err)
-    }
-})
-
-
-
-
-router.get("/votes/asc" , async (req, res) => {
-    
-    try{
-        const result = await client.search({
-          index: 'movies',
-          size : 10,
-          sort: [
-            { vote_average: "asc" }
+            { vote_average: orderBy }
           ]
         })
         const datas = await result.hits.hits

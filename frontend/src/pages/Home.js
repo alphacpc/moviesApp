@@ -26,8 +26,6 @@ const Home = () => {
     setLoaded(true)
   }
 
-  // const getFlag = (el)=> el._source.original_language==='en' ?  'us' : el._source.original_language
-
   const getFlag = (el) => {
     if(el._source.original_language==='en'){
       return 'us'
@@ -39,8 +37,50 @@ const Home = () => {
     }
   }
 
+const handleCheckedProduction = async (e) => {
+    const valueLabel = e.target.parentNode.querySelector("label").innerText
+    const result = await axios.get(`/companies?company=${valueLabel}`) 
+    console.log(result.data)
+}
+
+  
+  const handleLangues = async (e) => {
+    const langue = e.target.innerText
+    const result = await axios.get(`/langues?name=${langue}`) 
+    console.log(result.data)
+  }
   
 
+  const handleTypes = async (e) => {
+    const typeName = e.target.innerText
+    const result = await axios.get(`/types?name=${typeName}`) 
+    console.log(result.data)
+  }
+
+
+  const handlePopular = async (e) => {
+    const result = await axios.get(`/popularity`) 
+    console.log(result.data)
+}
+
+const handleReted = async (e) => {
+  const orderClassname = e.target.className
+  const result = await axios.get(`/votes?order=${orderClassname}`) 
+  console.log(result.data)
+}
+
+const handleReleaseYear = async (e) => {
+  const releaseYear = e.target.innerText
+  const result = await axios.get(`/release_date?year=${releaseYear}`) 
+  console.log(result.data)
+}
+
+
+const handleCountries = async (e) => {
+  const country = e.target.innerText
+  const result = await axios.get(`/countries?name=${country}`) 
+  console.log(result.data)
+}
 
   useEffect(()=>{
     fethMovies()
@@ -67,7 +107,13 @@ const Home = () => {
       <main className="home-container">
         <aside className='home-aside'>
           <h2>Filters</h2>
-          <LeftSider/>
+          <LeftSider  handleChecked = { handleCheckedProduction }
+                      handleLangues = { handleLangues }
+                      handleType = { handleTypes } 
+                      handlePopular = {handlePopular}
+                      handleReted = {handleReted}
+                      handleReleaseYear = {handleReleaseYear}
+                      handleCountries={handleCountries}/>
         </aside>
 
         <section className='home-section'>
