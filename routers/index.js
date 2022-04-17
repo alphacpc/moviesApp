@@ -217,4 +217,36 @@ router.get("/votes" , async (req, res) => {
 })
 
 
+// SEARCH MOVIE ON MULTIPLE FIELDS
+router.get("/search" , async (req, res) => {
+    
+  const wordSearched = req.query.keyword 
+
+  try{
+      const result = await client.search({
+        index: 'movies',
+        size : 100,
+        body:{
+          query:{
+            multi_match: {
+              query: wordSearched,
+              type: "best_fields",
+              fields: ["title","tagline", "overview"]
+            }
+          }
+        }
+      })
+
+      const datas = await result.hits.hits
+
+      res.status(200).json(datas);
+
+    
+  }
+  
+  catch(err){
+      console.log(err)
+  }
+})
+
 module.exports = router

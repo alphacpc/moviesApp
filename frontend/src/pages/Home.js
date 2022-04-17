@@ -84,11 +84,20 @@ const Home = () => {
     console.log(result.data)
   }
 
+
+  const handleSearch = async (val) => {
+    
+    const result = await axios.get(`/search?keyword=${val}`) 
+    console.log(result.data)
+  }
+
   useEffect(()=>{
     fethMovies()
   },[loaded,keyword ])
 
   
+console.log(keyword)
+
   return (
     <>
       <header className="heading">
@@ -98,7 +107,7 @@ const Home = () => {
           <h1>Elastic Web App Movies With ReactJS</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi quia commodi voluptates quas facilis eveniet delectus sapiente doloribus, veritatis minus vel quibusdam rem, distinctio at dicta amet obcaecati suscipit similique.
           Dolores ea et quaerat cupiditate voluptatibus aperiam est. Libero recusandae magni eius dolorem, consectetur inventore possimus nisi? Eveniet qui maxime temporibus optio?</p>
-          <input type="search" placeholder="Search ..." onChange={ (e) => setKeyword(e.target.value) }/>
+          <input type="search" placeholder="Search ..." onChange={ (e) => handleSearch(e.target.value) }/>
         </div>
 
       </header>
